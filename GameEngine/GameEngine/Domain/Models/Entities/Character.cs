@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameEngine.Domain.Models
+﻿namespace GameEngine.Domain.Models
 {
     public abstract class Character(int health, int damage)
     {

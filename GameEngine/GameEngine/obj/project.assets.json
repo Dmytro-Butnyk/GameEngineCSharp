@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "O:\\GitHub\\MyProjectsCSharp\\GameEngine\\GameEngine\\GameEngine.csproj",
+      "projectUniqueName": "O:\\GitHub\\GameEngineCSharp\\GameEngine\\GameEngine\\GameEngine.csproj",
       "projectName": "GameEngine",
-      "projectPath": "O:\\GitHub\\MyProjectsCSharp\\GameEngine\\GameEngine\\GameEngine.csproj",
+      "projectPath": "O:\\GitHub\\GameEngineCSharp\\GameEngine\\GameEngine\\GameEngine.csproj",
       "packagesPath": "C:\\Users\\dimab\\.nuget\\packages\\",
-      "outputPath": "O:\\GitHub\\MyProjectsCSharp\\GameEngine\\GameEngine\\obj\\",
+      "outputPath": "O:\\GitHub\\GameEngineCSharp\\GameEngine\\GameEngine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dimab\\AppData\\Roaming\\NuGet\\NuGet.Config",

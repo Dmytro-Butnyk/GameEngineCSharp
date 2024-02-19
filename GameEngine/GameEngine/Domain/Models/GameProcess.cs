@@ -1,14 +1,7 @@
 ﻿using GameEngine.Domain.Interfaces;
 using GameEngine.Domain.Models.Environment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Environment;
 using static System.Console;
+using static System.Environment;
 
 namespace GameEngine.Domain.Models
 {
@@ -96,7 +89,7 @@ namespace GameEngine.Domain.Models
                     return false;
             }
         }
-        public async void SwitchMove(char move, int x, int y)
+        public void SwitchMove(char move, int x, int y)
         {
             int newX = x, newY = y;
 
@@ -117,45 +110,23 @@ namespace GameEngine.Domain.Models
                 default:
                     return;
             }
-
-            var hero = _gameMap.BackMap[x][y] as MainHero;
-            var cell = _gameMap.BackMap[newX][newY];
-
+            MainHero? hero = _gameMap.BackMap[x][y] as MainHero;
+            dynamic cell = _gameMap.BackMap[newX][newY];
             if (cell is Enemy enemy)
             {
-                    TriggerEvent?.Invoke($"Battle with {enemy}");
-                    Thread.Sleep(2000);
-                if (enemy.Action(ref hero))
-                {
-                    _gameMap.BackMap[x][y] = hero;
-                    _gameMap.BackMap[newX][newY] = new Ground(Enums.GroundType.ground);
-                }
-                else
-                {
-                    WriteLine("Health < 0. Game over");
-                    ReadKey();
-                    Exit(0);
-                }
+                HandleEnemyInteraction(enemy, hero, x, y, newX, newY);
             }
             else if (cell is Coin coin)
             {
-                coin.Action(ref hero);
-                _gameMap.BackMap[x][y] = hero;
-                _gameMap.BackMap[newX][newY] = new Ground(Enums.GroundType.ground);
-                TriggerEvent?.Invoke($"Up {coin}");
-                Thread.Sleep(1000);
+                HandleCoinInteraction(coin, hero, x, y, newX, newY);
             }
-
-            (_gameMap.BackMap[x][y], _gameMap.BackMap[newX][newY]) =
-                (_gameMap.BackMap[newX][newY], _gameMap.BackMap[x][y]);
+            SwapCells(x, y, newX, newY);
         }
-
-
         public bool CheckWin()
         {
-            foreach(var it in _gameMap.BackMap)
+            foreach (List<dynamic> it in _gameMap.BackMap)
             {
-                foreach(var cell in it)
+                foreach (dynamic cell in it)
                 {
                     if (cell is Enemy)
                         return false;
@@ -167,8 +138,45 @@ namespace GameEngine.Domain.Models
         {
             int x, y;
             (x, y) = CheckHeroPosition();
-            var hero = _gameMap.BackMap[x][y] as MainHero;
+            MainHero? hero = _gameMap.BackMap[x][y] as MainHero;
             WriteLine(hero);
+        }
+        #endregion
+        // private methods
+        #region
+        private void HandleEnemyInteraction(Enemy enemy, MainHero hero, int x, int y, int newX, int newY)
+        {
+            TriggerEvent?.Invoke($"Battle with {enemy}");
+            Beep(200, 100);
+            Thread.Sleep(2000);
+            if (enemy.Action(ref hero))
+            {
+                _gameMap.BackMap[x][y] = hero;
+                _gameMap.BackMap[newX][newY] = new Ground(Enums.GroundType.ground);
+            }
+            else
+            {
+                WriteLine("Health < 0. Game over");
+                ReadKey();
+                Exit(0);
+            }
+        }
+
+        private void HandleCoinInteraction(Coin coin, MainHero hero, int x, int y, int newX, int newY)
+        {
+            Beep(1000, 100);
+            coin.Action(ref hero);
+            _gameMap.BackMap[x][y] = hero;
+            _gameMap.BackMap[newX][newY] = new Ground(Enums.GroundType.ground);
+            TriggerEvent?.Invoke($"Up {coin}");
+            Thread.Sleep(1000);
+        }
+
+        private void SwapCells(int x1, int y1, int x2, int y2)
+        {
+            dynamic temp = _gameMap.BackMap[x1][y1];
+            _gameMap.BackMap[x1][y1] = _gameMap.BackMap[x2][y2];
+            _gameMap.BackMap[x2][y2] = temp;
         }
         #endregion
     }

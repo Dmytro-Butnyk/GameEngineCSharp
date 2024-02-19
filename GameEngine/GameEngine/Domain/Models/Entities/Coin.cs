@@ -1,14 +1,8 @@
 ﻿using GameEngine.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameEngine.Domain.Models
 {
-    public class Coin(int lvlValue): IPeacefulActionHandler
+    public class Coin(int lvlValue) : IPeacefulActionHandler
     {
         private int _lvlValue = lvlValue;
         public int LvlValue
@@ -24,7 +18,7 @@ namespace GameEngine.Domain.Models
         }
         public override string ToString()
         {
-            return $"Coin: LVL: {_lvlValue}"; 
+            return $"Coin: LVL: {_lvlValue}";
         }
     }
 }

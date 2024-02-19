@@ -1,10 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using GameEngine.Domain.Enums;
 using GameEngine.Domain.Models;
 using GameEngine.Domain.Models.Environment;
-using System.Diagnostics;
 using static System.Console;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 /*
 WriteLine(" ......      ...   ...      ...       ...     ...    ...... \r\n" +
@@ -46,7 +43,7 @@ while (true)
 
     WriteLine("Enter move (w, a, s, d) or press Escape to exit:");
 
-    var key = ReadKey(true).Key;
+    ConsoleKey key = ReadKey(true).Key;
 
     if (key == ConsoleKey.Escape)
     {

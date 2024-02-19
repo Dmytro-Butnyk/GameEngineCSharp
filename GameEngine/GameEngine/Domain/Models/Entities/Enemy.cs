@@ -1,20 +1,15 @@
 ﻿using GameEngine.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameEngine.Domain.Models
 {
     public class Enemy : Character, IHostileActionHandler
     {
         private int _lvl;
-        public Enemy():base(10, 5)
+        public Enemy() : base(10, 5)
         {
             _lvl = 1;
         }
-        public Enemy(int lvl):base(lvl * 5, lvl * 3)
+        public Enemy(int lvl) : base(lvl * 5, lvl * 3)
         {
             _lvl = lvl;
         }

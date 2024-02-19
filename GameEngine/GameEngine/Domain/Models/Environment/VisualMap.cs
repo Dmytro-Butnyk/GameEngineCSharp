@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Console;
+﻿using static System.Console;
 
 namespace GameEngine.Domain.Models.Environment
 {
@@ -40,8 +35,8 @@ namespace GameEngine.Domain.Models.Environment
         {
             if (ob is Enemy)
             {
-                var enemy = (Enemy)ob;
-                if(enemy.Health >= 30)
+                Enemy enemy = (Enemy)ob;
+                if (enemy.Health >= 30)
                     ForegroundColor = ConsoleColor.Magenta; // Ground color
                 else if (enemy.Health >= 10 && enemy.Health < 30)
                     ForegroundColor = ConsoleColor.Red; // Ground color
